@@ -26,6 +26,7 @@ stages:
           **/*.yaml
           **/*.tf
         TargetFolder: '$(System.ArtifactStagingDirectory)'
+    - bash: ls -R $(System.DefaultWorkingDirectory)
   # - job:  SecondJob
   #   steps:
   #   - bash: echo "bUILD SECOND JOB"
