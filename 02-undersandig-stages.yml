@@ -19,6 +19,13 @@ stages:
     - bash: echo $(Build.BuildNumber)
     - bash: echo $(System.DefaultWorkingDirectory)
     - bash: ls -R $(System.DeffaultWorkingDirectory)
+    - task: CopyFiles@2
+      inputs:
+        SourceFolder: '$(System.DefaultWorkingDirectory)'
+        Contents: |
+          **/*.yaml
+          **/*.tf
+        TargetFolder: '$(System.ArtifactStagingDirectory)'
   # - job:  SecondJob
   #   steps:
   #   - bash: echo "bUILD SECOND JOB"
