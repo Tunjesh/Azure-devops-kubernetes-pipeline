@@ -16,34 +16,39 @@ stages:
     steps:
     - bash: echo "Build first Job"
     - bash:  echo $(PipelineLevelVariable)
-  - job:  SecondJob
-    steps:
-    - bash: echo "bUILD SECOND JOB"
+    - bash: echo $(Build.BuildNumber)
+    - bash: echo $(System.DefaultWorkingDirectory)
+    - bash: ls -R $(System.DeffaultWorkingDirectory)
+  # - job:  SecondJob
+  #   steps:
+  #   - bash: echo "bUILD SECOND JOB"
       
-- stage:  DevDeploy
-  variables:
-    environment: Dev
-  dependsOn:  Build
-  jobs:
-  - job:  FirstjobDevDeploy
-    steps:
-    - bash: echo "devdeploy first Job"
-    - bash:  echo $(environment)DeployJob
-- stage:  QADeploy
-  dependsOn: Build
-  jobs:
-  - job:  Firstjobqa
-    steps:
-    - bash: echo $(environment)Deployjob
+# - stage:  DevDeploy
+#   variables:
+#     environment: Dev
+#   dependsOn:  Build
+#   jobs:
+#   - job:  FirstjobDevDeploy
+#     steps:
+#     - bash: echo "devdeploy first Job"
+#     - bash:  echo $(environment)DeployJob
+# - stage:  QADeploy
+#   variables:
+#     environment: QA
+#   dependsOn: Build
+#   jobs:
+#   - job:  Firstjobqa
+#     steps:
+#     - bash: echo $(environment)Deployjob
    
-- stage:  ProdDeploy
-  dependsOn:
-  - QADeploy
-  - DevDeploy
+# - stage:  ProdDeploy
+#   dependsOn:
+#   - QADeploy
+#   - DevDeploy
   
-  jobs:
-  - job:  Firstjobprod
-    steps:
-    - bash: echo "prod first Job"
+#   jobs:
+#   - job:  Firstjobprod
+#     steps:
+#     - bash: echo "prod first Job"
 
 
